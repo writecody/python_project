@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900|Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>The Wishing App</title>
+    
+    <style>
+        *{margin: auto; padding: 5px;}
+        h1{font-family: 'Alegreya Sans SC', sans-serif; color: navy;}
+        .header{background-color: whitesmoke;}
+        .container{margin: auto; padding: 5px;}
+        .greeting{display: inline-block; width: 70%;}
+        .links{text-align: right; display: inline-block;}
+        .btn{background-color: navy; color: white; box-shadow: 2px 1px silver;}
+        tr{background-color: lightgray;}
+        th{margin: 0px 10px;}
+    </style>
+    
+</head>
+<body>
+    <div class=container>
+        
+        <div class="header">
+            
+            <div class="greeting">
+                <h1>Hello {{user.name}}!</h1>
+            </div> <!--closes greeting div-->
+            
+            <div class="links">
+                <a href='/logout'>Logout</a>
+            </div>
+            
+            <h3>Your wish list:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Added By</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                
+                {% for i in wish %}
+                <tr>
+                    <td><a href="saved/{{ i.id }}">{{i.item}}</a></td>
+                    <td> {{ i.creator.name }}</td>
+                    <td> {{ i.date_added }} </td>
+                    <td><a href="remove/{{ i.id }}">Remove</a> | 
+                        {% if i.creator == user %}
+                        <a href="delete/{{ i.id }}">Delete</a></td> 
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                
+                <h3>Other Users' Wish List:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Added By</th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    
+                    {% for j in savers %}
+                    <tr>
+                        <td> {{ j.item }} </td>
+                        <td> {{ j.creator.name }} </td>
+                        <td> {{ j.date_added }} </td>
+                        <td> <a href = "/add/{{ j.id }} ">Add to my Wishlist</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                
+                <a href='/new' class="btn">Add Item</a>
+                
+            </div> <!--close header div-->
+            
+        </div> <!--close container div-->
+    </body>
+    </html>
