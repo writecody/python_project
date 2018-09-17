@@ -18,16 +18,18 @@
         .links{text-align: right; display: inline-block;}
         .btn{background-color: navy; color: white; box-shadow: 2px 1px silver;}
         .box{background-color: rgb(229, 244, 228); border: 2px; border-color: silver;}
-    </style>
+    </style> 
     
 </head>
 <body>
+
     <div class=container>
         
         <div class="header">
+
             <div class="greeting">
                 <h1>Hello {{user.name}}! Create a New Wish List Item</h1>
-            </div> <!--closes greeting div-->
+            </div>
             
             <div class="links">
                 <a href='/dashboard'>Home</a>
@@ -41,15 +43,12 @@
                 {% for i in wish.savers.all %}
                     <p>{{ i.name }}</p>
                 {% endfor %}
-              
- 
-                
-        
-                
-            </div> <!--close header div-->
-        </div>
+            </div> 
+
+        </div> <!--close header div-->
         
     </div> <!--close container div-->
+
 </body>
 </html>
         

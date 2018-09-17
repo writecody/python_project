@@ -6,20 +6,17 @@ from datetime import datetime
 def index(request):
     if 'logged_in' not in request.session:
         request.session['logged_in'] = False
-
     return render(request, "webapp/index.html")
 
 def register(request):
     errors = User.objects.RegValidator(request.POST)
     if len(errors):
-        #this runs if there are errors present
         for key, value in errors.items():
             messages.error(request, value)
         print('*' * 30 + 'Registration attempt error messages: ')
         return redirect('/')
 
     else:
-        #this runs if there are no errors
         print('*' * 30 + 'No registration errors.')
         pwhash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt() )
         User.objects.create(
@@ -35,7 +32,6 @@ def register(request):
 def create(request):
     errors = Wish.objects.WishValidator(request.POST)
     if len(errors):
-        #this runs if there are errors present
         for key, value in errors.items():
             messages.error(request, value)
         return redirect('/new')
@@ -44,7 +40,6 @@ def create(request):
         wish = Wish.objects.create(
             item = request.POST['item'],
             creator = User.objects.get(id=request.session['id']),
-            # savers = User.objects.get(id=request.session['id']),
         )
         print('*'*40 +'else statement running')
         return redirect('/dashboard')
@@ -109,18 +104,17 @@ def remove(request, id):
 
 def add(request, id):
     toadd = Wish.objects.get(id=id)
-    currentuser=User.objects.get(id=request.session['id'])
+    currentuser = User.objects.get(id=request.session['id'])
     toadd.savers.add(currentuser)
     toadd.save()
     return redirect('/dashboard')
 
 def delete(request, id):
-    if request.method =='POST':
-        todelete = Wish.objects.get(id=id)
-        currentuser = User.objects.get(id=request.session['id'])
-        if todelete.creator == currentuser:
-            todelete.delete()
-            return redirect('/dashboard')
+    todelete = Wish.objects.get(id=id)
+    currentuser = User.objects.get(id=request.session['id'])
+    if todelete.creator == currentuser:
+        todelete.delete()
+        return redirect('/dashboard')
     else:
         return redirect('/dashboard')
         

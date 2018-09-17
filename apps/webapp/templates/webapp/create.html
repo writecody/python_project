@@ -21,9 +21,11 @@
     
 </head>
 <body>
+
     <div class=container>
         
         <div class="header">
+
             <div class="greeting">
                 <h1>Hello {{user.name}}! Create a New Wish List Item</h1>
             </div> <!--closes greeting div-->
@@ -39,7 +41,6 @@
             {% endif %}
             
             <div class="box">
-                
                 <form action="/create" method="post">
                     {% csrf_token %}
                     Item/Product: <input type="text" name="item"><br><br>
@@ -47,11 +48,12 @@
                 </form>
                 
                 <a href='/dashboard' class="btn">Cancel</a>
-                
-            </div> <!--close header div-->
-        </div>
+            </div> <!--close box div-->
+
+        </div> <!--close header div-->
         
     </div> <!--close container div-->
+    
 </body>
 </html>
         

@@ -28,7 +28,7 @@
             
             <div class="greeting">
                 <h1>Hello {{user.name}}!</h1>
-            </div> <!--closes greeting div-->
+            </div> 
             
             <div class="links">
                 <a href='/logout'>Logout</a>
@@ -56,33 +56,34 @@
                         {% endif %}
                     </tr>
                     {% endfor %}
-                </table>
+            </table>
                 
-                <h3>Other Users' Wish List:</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Added By</th>
-                            <th scope="col">Date Added</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    
-                    {% for j in savers %}
+            <h3>Other Users' Wish List:</h3>
+            <table>
+                <thead>
                     <tr>
-                        <td> {{ j.item }} </td>
-                        <td> {{ j.creator.name }} </td>
-                        <td> {{ j.date_added }} </td>
-                        <td> <a href = "/add/{{ j.id }} ">Add to my Wishlist</a></td>
+                        <th scope="col">Item</th>
+                        <th scope="col">Added By</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Action</th>
                     </tr>
-                    {% endfor %}
-                </table>
+                </thead>
                 
-                <a href='/new' class="btn">Add Item</a>
+                {% for j in savers %}
+                <tr>
+                    <td> {{ j.item }} </td>
+                    <td> {{ j.creator.name }} </td>
+                    <td> {{ j.date_added }} </td>
+                    <td> <a href = "/add/{{ j.id }} ">Add to my Wishlist</a></td>
+                </tr>
+                {% endfor %}
+            </table>
                 
-            </div> <!--close header div-->
+            <a href='/new' class="btn">Add Item</a>
+                
+        </div> <!--close header div-->
             
-        </div> <!--close container div-->
-    </body>
-    </html>
+    </div> <!--close container div-->
+    
+</body>
+</html>
