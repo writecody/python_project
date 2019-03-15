@@ -6,7 +6,7 @@ cffi==1.11.5
 click==6.7
 cryptography==2.2.2
 decorator==4.3.0
-Django==1.10
+Django==1.11.19
 Flask==1.0.2
 Flask-Bcrypt==0.7.1
 idna==2.7
